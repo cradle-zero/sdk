@@ -14,7 +14,6 @@ export {
   CHUNK_SIZE_CELL,
   ELEMENTS,
   type Element,
-  JOULES_PER_DOLLAR,
   MICROJOULES_PER_JOULE,
 } from "./constants.ts";
 export {

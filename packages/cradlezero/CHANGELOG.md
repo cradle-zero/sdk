@@ -1,5 +1,10 @@
 # cradlezero
 
+## 0.3.0
+
+- Breaking: removed `JOULES_PER_DOLLAR` (named `JOULES_PER_USD` in 0.1.0). Energy in CradleZero is measured only in joules; the package no longer defines any conversion from money.
+- The cradlezero.dev dictionary entry for the Sun no longer describes its joules as treasury-backed.
+
 ## 0.2.2
 
 - First release published to npm from `cradle-zero/sdk`, with provenance. The npm page now links to this repository.

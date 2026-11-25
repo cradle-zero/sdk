@@ -1,6 +1,6 @@
 {
   "name": "cradlezero",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Public constants, Construct ABI headers, manifest validator, and telemetry frame reader for CradleZero.",
   "license": "MIT",
   "author": "CradleZero",
