@@ -1,6 +1,6 @@
 {
   "name": "cradlezero",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Public constants, Construct ABI headers, manifest validator, and telemetry frame reader for CradleZero.",
   "license": "MIT",
   "author": "CradleZero",
@@ -9,6 +9,9 @@
     "type": "git",
     "url": "git+https://github.com/cradle-zero/sdk.git",
     "directory": "packages/cradlezero"
+  },
+  "bugs": {
+    "url": "https://github.com/cradle-zero/sdk/issues"
   },
   "keywords": [
     "cradlezero",
