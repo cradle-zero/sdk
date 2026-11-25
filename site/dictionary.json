@@ -196,7 +196,7 @@
       "plural": "springs",
       "term_class": "entity",
       "surface_scope": "substrate",
-      "definition": "Radiant thermal source emitting treasury-backed joules into surrounding cells."
+      "definition": "Radiant thermal source emitting joules into surrounding cells."
     },
     {
       "slug": "joule",

@@ -2,8 +2,6 @@
 export const CHUNK_SIZE_CELL = 64;
 /** Microjoules in one joule. */
 export const MICROJOULES_PER_JOULE = 1_000_000n;
-/** Joules minted per dollar entering the compute treasury. */
-export const JOULES_PER_DOLLAR = 1_000n;
 /** Basis points that make up a whole (100 percent). */
 export const BPS_WHOLE = 10_000;
 /** The five elemental species of the substrate. */
