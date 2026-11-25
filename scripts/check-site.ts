@@ -1,4 +1,4 @@
-// Checks the cradlezero.dev site: dictionary.json shape and that local links resolve.
+// Checks the cradlezero.dev site: dictionary.json shape, local links, and the TDM reservation.
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join } from "node:path";
 
@@ -35,6 +35,15 @@ for (const file of walk(site).filter((path) => /\.(html|txt)$/.test(path))) {
       problems.push(`${file.slice(site.length)}: broken link ${target}`);
     }
   }
+}
+
+const headers = readFileSync(join(site, "_headers"), "utf8");
+if (!/^\/\*\n {2}tdm-reservation: 1$/m.test(headers)) {
+  problems.push("_headers: /* must send tdm-reservation: 1");
+}
+const tdmrep: unknown = JSON.parse(readFileSync(join(site, ".well-known/tdmrep.json"), "utf8"));
+if (JSON.stringify(tdmrep) !== JSON.stringify([{ location: "/*", "tdm-reservation": 1 }])) {
+  problems.push(".well-known/tdmrep.json: must reserve /* with tdm-reservation 1");
 }
 
 for (const problem of problems) console.error(problem);
