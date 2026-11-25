@@ -1,0 +1,12 @@
+{
+  "protocol_version": 1,
+  "kind": "ignition",
+  "event_id": "ign-000042",
+  "tick": "48230",
+  "phenomenon_type": "flare",
+  "joules_added_uj": "16500000000",
+  "solar_reserve_uj": "14025000000",
+  "solar_output_daily_uj": "322575000",
+  "callsign": "Nova_99",
+  "source_kind": "patron"
+}

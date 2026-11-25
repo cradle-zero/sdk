@@ -24,5 +24,8 @@ Read-only frames on the public telemetry stream. Readers ignore unknown fields.
 
 - hello: { protocol_version, kind: "hello", epoch_slug, tick }
 - tick: { protocol_version, kind: "tick", tick, chunk_x, chunk_y, solar_output_uj, auton_count }
+- ignition: { protocol_version, kind: "ignition", event_id, tick, phenomenon_type (spark | flare | corona | supernova | pulse), joules_added_uj, solar_reserve_uj, solar_output_daily_uj, callsign, source_kind (observer | patron | cosmic) }
+
+An ignition is energy added to the Sun. joules_added_uj is the exact energy that ignition added; solar_reserve_uj and solar_output_daily_uj are the Sun's state after it landed. callsign is 2 to 16 letters, digits or underscores, or ANONYMOUS.
 
 tick and every _uj value are decimal strings. Reference reader: readFrame() in cradlezero/telemetry. Golden fixtures ship in the npm package under fixtures/telemetry/v1.

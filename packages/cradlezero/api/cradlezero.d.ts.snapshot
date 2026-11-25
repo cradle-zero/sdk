@@ -44,7 +44,7 @@ export declare function readDecimal(value: unknown): bigint | null;
 export { ABI_V1_EXPORTS, ABI_V1_GAS_LIMIT_MAX, ABI_V1_IMPORTS, ABI_V1_MEMORY_PAGE_LIMIT, ABI_V1_MODULE, ABI_V1_MODULE_BYTE_LIMIT, ABI_V1_VERSION, type AbiFunction, type WasmValueType, } from "./abi-v1.ts";
 export { BPS_WHOLE, CHUNK_SIZE_CELL, ELEMENTS, type Element, MICROJOULES_PER_JOULE, } from "./constants.ts";
 export { type ConstructGeometry, type ConstructManifestV1, GEOMETRY_HUE_INDEX_MAX, GEOMETRY_SHAPES, type GeometryShape, type ManifestResult, validateConstructManifest, } from "./manifest.ts";
-export { type Frame, type HelloFrame, PROTOCOL_VERSION, readFrame, type TickFrame, writeFrame, } from "./telemetry.ts";
+export { ANONYMOUS_CALLSIGN, type Frame, type HelloFrame, IGNITION_PHENOMENA, IGNITION_SOURCES, type IgnitionFrame, type IgnitionPhenomenon, type IgnitionSource, PROTOCOL_VERSION, readFrame, type TickFrame, writeFrame, } from "./telemetry.ts";
 
 // manifest.d.ts
 export declare const GEOMETRY_SHAPES: readonly ["rect", "circle", "line"];
@@ -97,10 +97,33 @@ export interface TickFrame {
     readonly solar_output_uj: bigint;
     readonly auton_count: number;
 }
-export type Frame = HelloFrame | TickFrame;
+/** What the energy injection looked like on the stream. */
+export declare const IGNITION_PHENOMENA: readonly ["spark", "flare", "corona", "supernova", "pulse"];
+export type IgnitionPhenomenon = (typeof IGNITION_PHENOMENA)[number];
+/** Who caused it: a viewer, a patron, or the universe itself (scheduled pulses and milestones). */
+export declare const IGNITION_SOURCES: readonly ["observer", "patron", "cosmic"];
+export type IgnitionSource = (typeof IGNITION_SOURCES)[number];
+/** Callsign shown when a patron stays anonymous or the requested callsign is not allowed. */
+export declare const ANONYMOUS_CALLSIGN = "ANONYMOUS";
+/** Energy added to the Sun, with the reserve and daily output after it landed. */
+export interface IgnitionFrame {
+    readonly protocol_version: number;
+    readonly kind: "ignition";
+    readonly event_id: string;
+    readonly tick: bigint;
+    readonly phenomenon_type: IgnitionPhenomenon;
+    readonly joules_added_uj: bigint;
+    readonly solar_reserve_uj: bigint;
+    readonly solar_output_daily_uj: bigint;
+    readonly callsign: string;
+    readonly source_kind: IgnitionSource;
+}
+export type Frame = HelloFrame | TickFrame | IgnitionFrame;
 /**
  * Reads one public telemetry frame. Tolerant: unknown fields are ignored and missing optional
- * fields get defaults. Returns null for unknown kinds or required fields that cannot be read.
+ * fields get defaults. Returns null for unknown kinds or required fields that cannot be read. An
+ * ignition callsign that is missing or not 2 to 16 letters, digits or underscores reads as
+ * ANONYMOUS.
  */
 export declare function readFrame(input: unknown): Frame | null;
 /** Encodes a frame for the wire: bigint values become decimal strings. */

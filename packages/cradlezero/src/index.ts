@@ -26,8 +26,14 @@ export {
   validateConstructManifest,
 } from "./manifest.ts";
 export {
+  ANONYMOUS_CALLSIGN,
   type Frame,
   type HelloFrame,
+  IGNITION_PHENOMENA,
+  IGNITION_SOURCES,
+  type IgnitionFrame,
+  type IgnitionPhenomenon,
+  type IgnitionSource,
   PROTOCOL_VERSION,
   readFrame,
   type TickFrame,

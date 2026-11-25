@@ -1,6 +1,6 @@
 name: publish-npm
 
-# Runs on a version tag (v0.3.0). Packs once, attaches the tarball to a GitHub release, then
+# Runs on a version tag (v0.4.0). Packs once, attaches the tarball to a GitHub release, then
 # stages that same tarball on npm through Trusted Publishing (repository variable
 # NPM_TRUSTED_PUBLISHING = true). A staged version goes live only after a maintainer approves it
 # on npmjs.com with two-factor authentication.

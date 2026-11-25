@@ -1,0 +1,12 @@
+{
+  "protocol_version": 1,
+  "kind": "ignition",
+  "event_id": "ign-000043",
+  "tick": "48231",
+  "phenomenon_type": "pulse",
+  "joules_added_uj": "500000000",
+  "solar_reserve_uj": "14450000000",
+  "solar_output_daily_uj": "332350000",
+  "source_kind": "cosmic",
+  "aurora_hue": 7
+}
