@@ -1,0 +1,27 @@
+{
+  "name": "sdk",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.34.9",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "check": "biome check .",
+    "fix": "biome check --write .",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "build": "pnpm -r build",
+    "api": "node scripts/check-api.ts",
+    "api:update": "node scripts/check-api.ts --update",
+    "site": "node scripts/check-site.ts",
+    "gate": "pnpm check && pnpm typecheck && pnpm test && pnpm build && pnpm api && pnpm site",
+    "changeset": "changeset"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.9",
+    "@changesets/cli": "3.0.3",
+    "@types/node": "24.19.4",
+    "typescript": "6.0.3"
+  }
+}

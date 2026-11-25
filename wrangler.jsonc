@@ -1,0 +1,8 @@
+{
+  // Static manual for the cradlezero.dev apex. Subdomains belong to the platform edge Worker.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cradlezero-manual",
+  "compatibility_date": "2026-11-25",
+  "assets": { "directory": "./site" },
+  "routes": [{ "pattern": "cradlezero.dev", "custom_domain": true }]
+}

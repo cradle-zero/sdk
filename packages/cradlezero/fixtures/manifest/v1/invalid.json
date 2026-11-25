@@ -1,0 +1,9 @@
+{
+  "abi_version": 1,
+  "slug": "X",
+  "author_id": "kip",
+  "gas_limit": 0,
+  "royalty_bps": 0.5,
+  "memory_page_limit": 3,
+  "geometry": { "shape": "cube", "width_cell": 65, "height_cell": 1, "hue_index": 3 }
+}

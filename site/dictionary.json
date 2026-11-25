@@ -1,0 +1,279 @@
+{
+  "dictionary_version": "1.0.0",
+  "grammar": "entity_qualifier_property_unit",
+  "terms": [
+    {
+      "slug": "id",
+      "plural": "ids",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Immutable, globally unique surrogate identifier decoupled from mutable slugs or labels."
+    },
+    {
+      "slug": "slug",
+      "plural": "slugs",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Human-readable, URL-safe lowercase natural key ([a-z0-9-]+) resolvable via legacy aliases if renamed."
+    },
+    {
+      "slug": "hash",
+      "plural": "hashes",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Deterministic cryptographic digest (SHA-256) proving content, state, or blueprint integrity."
+    },
+    {
+      "slug": "type",
+      "plural": "types",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Mutually exclusive structural classification governing the rules and behavior of an entity."
+    },
+    {
+      "slug": "status",
+      "plural": "statuses",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Discrete lifecycle phase occupied by a record within a controlled state machine."
+    },
+    {
+      "slug": "state",
+      "plural": "states",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Complete mutable vector of internal values belonging to an entity at a specific tick."
+    },
+    {
+      "slug": "scope",
+      "plural": "scopes",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Operational or visibility boundary within which a permission, term, or rule applies."
+    },
+    {
+      "slug": "tier",
+      "plural": "tiers",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Ordered discrete rank along a capability, metabolic cost, or civilization progression scale."
+    },
+    {
+      "slug": "actor",
+      "plural": "actors",
+      "term_class": "entity",
+      "surface_scope": "universal",
+      "definition": "Principal entity capable of initiating an auditable event (auton, human, bot, or system)."
+    },
+    {
+      "slug": "role",
+      "plural": "roles",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Functional responsibility or emergent behavioral persona occupied by an actor."
+    },
+    {
+      "slug": "unit",
+      "plural": "units",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Standardized measurement scale appended to numeric properties (joules, cents, ms, ticks)."
+    },
+    {
+      "slug": "reserve",
+      "plural": "reserves",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Stored balance of conserved energy or currency held for future draw."
+    },
+    {
+      "slug": "limit",
+      "plural": "limits",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Hard maximum ceiling enforced deterministically by the kernel or billing circuit breakers."
+    },
+    {
+      "slug": "rate",
+      "plural": "rates",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Quantity emitted, consumed, or decayed per unit of time or tick."
+    },
+    {
+      "slug": "ratio",
+      "plural": "ratios",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Proportional share, stored as integer basis points (bps, 10,000 = 100 percent)."
+    },
+    {
+      "slug": "delta",
+      "plural": "deltas",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Signed net change (+ or -) recorded between two consecutive states or ticks."
+    },
+    {
+      "slug": "score",
+      "plural": "scores",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Computed numeric ranking metric used for memory salience or camera narrative tension."
+    },
+    {
+      "slug": "timestamp",
+      "plural": "timestamps",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Wall-clock UTC instant (ISO-8601) paired alongside the canonical universe tick."
+    },
+    {
+      "slug": "event",
+      "plural": "events",
+      "term_class": "entity",
+      "surface_scope": "universal",
+      "definition": "Immutable historical fact appended to a log once a state transition commits."
+    },
+    {
+      "slug": "log",
+      "plural": "logs",
+      "term_class": "container",
+      "surface_scope": "universal",
+      "definition": "Append-only chronological sequence of events supporting auditability and deterministic replay."
+    },
+    {
+      "slug": "version",
+      "plural": "versions",
+      "term_class": "property",
+      "surface_scope": "universal",
+      "definition": "Semantic revision identifier (major.minor.patch) tracking non-breaking vs. breaking evolution."
+    },
+    {
+      "slug": "substrate",
+      "plural": "substrates",
+      "term_class": "entity",
+      "surface_scope": "substrate",
+      "definition": "Active compiled coordinate plane where physical laws execute and autons exist."
+    },
+    {
+      "slug": "void",
+      "plural": "voids",
+      "term_class": "entity",
+      "surface_scope": "substrate",
+      "definition": "Uncompiled territory beyond active substrate chunks requiring continuous joules to instantiate."
+    },
+    {
+      "slug": "chunk",
+      "plural": "chunks",
+      "term_class": "container",
+      "surface_scope": "substrate",
+      "definition": "Discrete 64x64 coordinate partition governed by one single-threaded state instance."
+    },
+    {
+      "slug": "cell",
+      "plural": "cells",
+      "term_class": "entity",
+      "surface_scope": "substrate",
+      "definition": "Single (x, y) coordinate tile within a chunk holding matter, flux, or a construct."
+    },
+    {
+      "slug": "tick",
+      "plural": "ticks",
+      "term_class": "unit",
+      "surface_scope": "substrate",
+      "definition": "Atomic discrete step of cosmic time advancing physics, entropy, and reflexes deterministically."
+    },
+    {
+      "slug": "epoch",
+      "plural": "epochs",
+      "term_class": "entity",
+      "surface_scope": "substrate",
+      "definition": "Named historical era along the unbroken cosmic timeline starting at Tick Zero."
+    },
+    {
+      "slug": "spring",
+      "plural": "springs",
+      "term_class": "entity",
+      "surface_scope": "substrate",
+      "definition": "Radiant thermal source emitting treasury-backed joules into surrounding cells."
+    },
+    {
+      "slug": "joule",
+      "plural": "joules",
+      "term_class": "unit",
+      "surface_scope": "substrate",
+      "definition": "Conserved thermodynamic energy unit required for movement, repair, gestation, cognition, and compilation."
+    },
+    {
+      "slug": "matter",
+      "plural": "matter",
+      "term_class": "entity",
+      "surface_scope": "substrate",
+      "definition": "Conserved structural material harvested from cells to repair chassis wear or build constructs."
+    },
+    {
+      "slug": "element",
+      "plural": "elements",
+      "term_class": "property",
+      "surface_scope": "substrate",
+      "definition": "Fundamental physical species of matter or energy interacting inside substrate cells."
+    },
+    {
+      "slug": "wave",
+      "plural": "waves",
+      "term_class": "entity",
+      "surface_scope": "substrate",
+      "definition": "Acoustic or thermal disturbance propagating locally across cells at finite speed with distance attenuation."
+    },
+    {
+      "slug": "radius",
+      "plural": "radii",
+      "term_class": "property",
+      "surface_scope": "substrate",
+      "definition": "Spatial reach measured in cells from a spring, sensor, or wave origin."
+    },
+    {
+      "slug": "entropy",
+      "plural": "entropy",
+      "term_class": "process",
+      "surface_scope": "substrate",
+      "definition": "Continuous per-tick structural decay returning unpowered constructs and uninhabited chunks to dormant state."
+    },
+    {
+      "slug": "gas",
+      "plural": "gas",
+      "term_class": "unit",
+      "surface_scope": "substrate",
+      "definition": "Metered per-tick WebAssembly instruction and memory execution cost consumed by an active construct."
+    },
+    {
+      "slug": "auton",
+      "plural": "autons",
+      "term_class": "entity",
+      "surface_scope": "substrate",
+      "definition": "Sovereign, mortal physical mind owning a chassis, joule reserve, episodic memory, and cryptographic identity."
+    },
+    {
+      "slug": "chassis",
+      "plural": "chassis",
+      "term_class": "entity",
+      "surface_scope": "substrate",
+      "definition": "Physical body of an auton composed of conserved matter, housing local sensors and actuators."
+    },
+    {
+      "slug": "sensor",
+      "plural": "sensors",
+      "term_class": "entity",
+      "surface_scope": "substrate",
+      "definition": "Somatic input organ on a chassis or construct reading local gradients, waves, and internal condition."
+    },
+    {
+      "slug": "actuator",
+      "plural": "actuators",
+      "term_class": "entity",
+      "surface_scope": "substrate",
+      "definition": "Somatic motor organ enabling a chassis or construct to move, harvest, repair, transfer joules, or emit waves."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "protocol_version": 1,
+  "kind": "tick",
+  "tick": "48221",
+  "chunk_x": 0,
+  "chunk_y": 0,
+  "solar_output_uj": "979000",
+  "auton_count": 4,
+  "future_field": { "added_in": 2 }
+}

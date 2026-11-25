@@ -1,0 +1,109 @@
+// abi-v1.d.ts
+/** Construct ABI version 1. Published versions never change; new capabilities go in a new version. */
+export declare const ABI_V1_VERSION = 1;
+/** WebAssembly import module name for every v1 host call. */
+export declare const ABI_V1_MODULE = "cz_v1";
+export type WasmValueType = "i32" | "i64";
+export interface AbiFunction {
+    readonly name: string;
+    readonly params: readonly WasmValueType[];
+    readonly result: WasmValueType | null;
+    readonly summary: string;
+}
+/** Host calls a Construct may import from `cz_v1`. */
+export declare const ABI_V1_IMPORTS: readonly AbiFunction[];
+/** Functions every v1 Construct must export. */
+export declare const ABI_V1_EXPORTS: readonly AbiFunction[];
+/** Linear memory ceiling for a v1 Construct, in 64 KiB pages. */
+export declare const ABI_V1_MEMORY_PAGE_LIMIT = 2;
+/** Largest gas limit a v1 manifest may declare, in metered instructions per tick. */
+export declare const ABI_V1_GAS_LIMIT_MAX = 1000000;
+/** Largest compiled module size accepted, in bytes. */
+export declare const ABI_V1_MODULE_BYTE_LIMIT = 65536;
+
+// constants.d.ts
+/** Cells along one edge of a chunk. */
+export declare const CHUNK_SIZE_CELL = 64;
+/** Microjoules in one joule. */
+export declare const MICROJOULES_PER_JOULE = 1000000n;
+/** Joules minted per dollar entering the compute treasury. */
+export declare const JOULES_PER_DOLLAR = 1000n;
+/** Basis points that make up a whole (100 percent). */
+export declare const BPS_WHOLE = 10000;
+/** The five elemental species of the substrate. */
+export declare const ELEMENTS: readonly ["flux", "mass", "conductor", "catalyst", "crystal"];
+export type Element = (typeof ELEMENTS)[number];
+
+// guard.d.ts
+/** Small runtime type guards shared by the validators. Internal. */
+export type Plain = Readonly<Record<string, unknown>>;
+export declare function isPlain(value: unknown): value is Plain;
+export declare function isIntegerIn(value: unknown, min: number, max: number): value is number;
+/** Reads a decimal string (or a safe integer number) as a bigint. */
+export declare function readDecimal(value: unknown): bigint | null;
+
+// index.d.ts
+export { ABI_V1_EXPORTS, ABI_V1_GAS_LIMIT_MAX, ABI_V1_IMPORTS, ABI_V1_MEMORY_PAGE_LIMIT, ABI_V1_MODULE, ABI_V1_MODULE_BYTE_LIMIT, ABI_V1_VERSION, type AbiFunction, type WasmValueType, } from "./abi-v1.ts";
+export { BPS_WHOLE, CHUNK_SIZE_CELL, ELEMENTS, type Element, JOULES_PER_DOLLAR, MICROJOULES_PER_JOULE, } from "./constants.ts";
+export { type ConstructGeometry, type ConstructManifestV1, GEOMETRY_HUE_INDEX_MAX, GEOMETRY_SHAPES, type GeometryShape, type ManifestResult, validateConstructManifest, } from "./manifest.ts";
+export { type Frame, type HelloFrame, PROTOCOL_VERSION, readFrame, type TickFrame, writeFrame, } from "./telemetry.ts";
+
+// manifest.d.ts
+export declare const GEOMETRY_SHAPES: readonly ["rect", "circle", "line"];
+export type GeometryShape = (typeof GEOMETRY_SHAPES)[number];
+/** Largest hue index in the Telescope palette. */
+export declare const GEOMETRY_HUE_INDEX_MAX = 11;
+export interface ConstructGeometry {
+    readonly shape: GeometryShape;
+    readonly width_cell: number;
+    readonly height_cell: number;
+    readonly hue_index: number;
+}
+export interface ConstructManifestV1 {
+    readonly abi_version: 1;
+    readonly slug: string;
+    readonly author_id: string;
+    readonly gas_limit: number;
+    readonly royalty_bps: number;
+    readonly memory_page_limit: number;
+    readonly geometry: ConstructGeometry;
+}
+export type ManifestResult = {
+    readonly ok: true;
+    readonly manifest: ConstructManifestV1;
+} | {
+    readonly ok: false;
+    readonly issues: readonly string[];
+};
+/**
+ * Validates a Construct manifest. Manifests are authored input, so unknown fields are rejected.
+ * Supports abi_version 1; later versions are reported as unsupported by this release.
+ */
+export declare function validateConstructManifest(input: unknown): ManifestResult;
+
+// telemetry.d.ts
+/** Current public telemetry protocol version. */
+export declare const PROTOCOL_VERSION = 1;
+export interface HelloFrame {
+    readonly protocol_version: number;
+    readonly kind: "hello";
+    readonly epoch_slug: string;
+    readonly tick: bigint;
+}
+export interface TickFrame {
+    readonly protocol_version: number;
+    readonly kind: "tick";
+    readonly tick: bigint;
+    readonly chunk_x: number;
+    readonly chunk_y: number;
+    readonly solar_output_uj: bigint;
+    readonly auton_count: number;
+}
+export type Frame = HelloFrame | TickFrame;
+/**
+ * Reads one public telemetry frame. Tolerant: unknown fields are ignored and missing optional
+ * fields get defaults. Returns null for unknown kinds or required fields that cannot be read.
+ */
+export declare function readFrame(input: unknown): Frame | null;
+/** Encodes a frame for the wire: bigint values become decimal strings. */
+export declare function writeFrame(frame: Frame): Record<string, string | number>;

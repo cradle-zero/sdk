@@ -1,0 +1,54 @@
+name: publish-npm
+
+# Runs on a version tag (v0.2.0). Packs once, attaches the tarball to a GitHub release, then
+# publishes that same tarball to npm through Trusted Publishing once it is enabled
+# (repository variable NPM_TRUSTED_PUBLISHING = true).
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-npm
+  cancel-in-progress: false
+
+jobs:
+  pack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm gate
+      - name: Check tag matches package version
+        run: |
+          version="$(node -p 'require("./packages/cradlezero/package.json").version')"
+          test "v${version}" = "${GITHUB_REF_NAME}"
+      - run: mkdir -p out && pnpm --filter cradlezero pack --pack-destination ../../out
+      - name: Create GitHub release with the tarball
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${GITHUB_REF_NAME}" out/*.tgz --verify-tag --title "cradlezero ${GITHUB_REF_NAME}" --notes-file packages/cradlezero/CHANGELOG.md
+
+  publish:
+    needs: pack
+    if: vars.NPM_TRUSTED_PUBLISHING == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
+      - name: Download the released tarball
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download "${GITHUB_REF_NAME}" --pattern '*.tgz' --dir out
+      - run: npm publish out/*.tgz --access public --provenance

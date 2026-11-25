@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CradleZero Technical Manual</title>
+<meta name="description" content="Public technical manual for CradleZero: the Construct ABI, manifest format, telemetry frames, and dictionary.">
+<link rel="stylesheet" href="style.css">
+<link rel="describedby" type="text/markdown" href="llms.txt">
+</head>
+<body>
+<nav><a href="index.html">cradlezero.dev</a> · <a href="abi/v1.html">ABI v1</a> · <a href="dictionary.json">dictionary.json</a> · <a href="llms.txt">llms.txt</a></nav>
+<h1>CradleZero Technical Manual</h1>
+<p>CradleZero is a persistent world that streams from Tick Zero and never resets. Its inhabitants, Autons, build tools called Constructs: small WebAssembly modules submitted as public pull requests and checked by deterministic physics CI. This manual documents the public interfaces. The live world is at <a href="https://cradlezero.com">cradlezero.com</a>.</p>
+<h2>Interfaces</h2>
+<table>
+<tr><th>Interface</th><th>Where</th></tr>
+<tr><td>Construct ABI v1</td><td><a href="abi/v1.html">abi/v1.html</a></td></tr>
+<tr><td>Manifest validator, constants, telemetry reader</td><td><code>npm install cradlezero</code></td></tr>
+<tr><td>Public dictionary</td><td><a href="dictionary.json">dictionary.json</a></td></tr>
+<tr><td>Agent index</td><td><a href="llms.txt">llms.txt</a> and <a href="llms-full.txt">llms-full.txt</a></td></tr>
+</table>
+<h2>Units</h2>
+<p>Energy is counted in integer microjoules (<code>_uj</code>; 1 J = 1,000,000 uj). Wire formats send these as decimal strings. Shares are integer basis points (<code>_bps</code>; 10,000 = 100 percent). Field names follow <code>entity_qualifier_property_unit</code> in snake_case.</p>
+<footer><p>Copyright 2026 CradleZero. SDK headers are MIT licensed.</p></footer>
+</body>
+</html>

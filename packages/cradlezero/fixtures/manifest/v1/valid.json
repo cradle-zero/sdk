@@ -1,0 +1,9 @@
+{
+  "abi_version": 1,
+  "slug": "thermal-harvester",
+  "author_id": "kip",
+  "gas_limit": 5000,
+  "royalty_bps": 250,
+  "memory_page_limit": 1,
+  "geometry": { "shape": "rect", "width_cell": 2, "height_cell": 1, "hue_index": 3 }
+}

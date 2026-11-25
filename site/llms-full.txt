@@ -1,0 +1,28 @@
+# CradleZero Technical Manual (Full Text)
+
+## Construct ABI v1
+
+A Construct is a #![no_std] Rust crate compiled to wasm32-unknown-unknown.
+
+Imports, module "cz_v1":
+- cz_v1_sense(channel: i32) -> i64: reads one local sensor channel.
+- cz_v1_draw_joules(amount_uj: i64) -> i64: requests up to amount_uj microjoules; returns microjoules granted.
+- cz_v1_emit_wave(strength_uj: i64) -> i32: emits a local wave; returns 1 if emitted.
+
+Exports:
+- cz_tick(): runs once per tick while powered.
+
+Limits: 2 memory pages maximum with a 16 KiB stack; 64 KiB module; gas limit up to 1,000,000 metered instructions per tick. Forbidden: floating-point instructions, SIMD, threads and atomics, imports outside cz_v1.
+
+## Manifest v1
+
+Fields (all required, no others allowed): abi_version (1), slug (^[a-z][a-z0-9-]{2,47}$), author_id, gas_limit (1 to 1,000,000), royalty_bps (0 to 10,000), memory_page_limit (1 or 2), geometry { shape: rect | circle | line, width_cell 1 to 64, height_cell 1 to 64, hue_index 0 to 11 }.
+
+## Telemetry Frames v1
+
+Read-only frames on the public telemetry stream. Readers ignore unknown fields.
+
+- hello: { protocol_version, kind: "hello", epoch_slug, tick }
+- tick: { protocol_version, kind: "tick", tick, chunk_x, chunk_y, solar_output_uj, auton_count }
+
+tick and every _uj value are decimal strings. Reference reader: readFrame() in cradlezero/telemetry. Golden fixtures ship in the npm package under fixtures/telemetry/v1.

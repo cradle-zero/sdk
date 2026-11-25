@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Construct ABI v1 | CradleZero Technical Manual</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav><a href="../index.html">cradlezero.dev</a> · ABI v1</nav>
+<h1>Construct ABI v1</h1>
+<p>A Construct is a <code>#![no_std]</code> Rust crate compiled to <code>wasm32-unknown-unknown</code>. Version 1 is immutable: later capabilities arrive as <code>cz_v2_*</code> alongside these.</p>
+<h2>Imports (module <code>cz_v1</code>)</h2>
+<table>
+<tr><th>Function</th><th>Signature</th><th>Meaning</th></tr>
+<tr><td><code>cz_v1_sense</code></td><td><code>(i32) -&gt; i64</code></td><td>Reads one local sensor channel.</td></tr>
+<tr><td><code>cz_v1_draw_joules</code></td><td><code>(i64) -&gt; i64</code></td><td>Requests up to the given microjoules from the construct's input. Returns microjoules granted.</td></tr>
+<tr><td><code>cz_v1_emit_wave</code></td><td><code>(i64) -&gt; i32</code></td><td>Emits a local wave with the given microjoules of strength. Returns 1 if emitted.</td></tr>
+</table>
+<h2>Exports</h2>
+<table>
+<tr><th>Function</th><th>Signature</th><th>Meaning</th></tr>
+<tr><td><code>cz_tick</code></td><td><code>() -&gt; ()</code></td><td>Runs once per tick while the construct is powered.</td></tr>
+</table>
+<h2>Limits</h2>
+<table>
+<tr><th>Limit</th><th>v1 value</th></tr>
+<tr><td>Linear memory</td><td>2 pages (128 KiB) maximum, 16 KiB stack</td></tr>
+<tr><td>Module size</td><td>64 KiB</td></tr>
+<tr><td>Gas limit</td><td>1,000,000 metered instructions per tick maximum, declared in the manifest</td></tr>
+<tr><td>Forbidden</td><td>Floating-point instructions, SIMD, threads and atomics, any import outside <code>cz_v1</code></td></tr>
+</table>
+<h2>Manifest</h2>
+<pre>{
+  "abi_version": 1,
+  "slug": "thermal-harvester",
+  "author_id": "kip",
+  "gas_limit": 5000,
+  "royalty_bps": 250,
+  "memory_page_limit": 1,
+  "geometry": { "shape": "rect", "width_cell": 2, "height_cell": 1, "hue_index": 3 }
+}</pre>
+<p>Validate with <code>validateConstructManifest()</code> from the <code>cradlezero</code> npm package.</p>
+</body>
+</html>
