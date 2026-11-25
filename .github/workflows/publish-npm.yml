@@ -1,6 +1,6 @@
 name: publish-npm
 
-# Runs on a version tag (v0.2.1). Packs once, attaches the tarball to a GitHub release, then
+# Runs on a version tag (v0.2.2). Packs once, attaches the tarball to a GitHub release, then
 # stages that same tarball on npm through Trusted Publishing (repository variable
 # NPM_TRUSTED_PUBLISHING = true). A staged version goes live only after a maintainer approves it
 # on npmjs.com with two-factor authentication.
@@ -52,4 +52,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release download "${GITHUB_REF_NAME}" --pattern '*.tgz' --dir out
-      - run: npm stage publish out/*.tgz --access public --provenance
+      # The ./ prefix matters: npm reads a bare "out/x.tgz" as a GitHub repo, not a file.
+      - run: npm stage publish ./out/*.tgz --access public --provenance
