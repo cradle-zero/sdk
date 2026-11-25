@@ -29,7 +29,7 @@ jobs:
         run: |
           version="$(node -p 'require("./packages/cradlezero/package.json").version')"
           test "v${version}" = "${GITHUB_REF_NAME}"
-      - run: mkdir -p out && pnpm --filter cradlezero pack --pack-destination ../../out
+      - run: mkdir -p out && pnpm --filter cradlezero pack --pack-destination "${GITHUB_WORKSPACE}/out"
       - name: Create GitHub release with the tarball
         env:
           GH_TOKEN: ${{ github.token }}
