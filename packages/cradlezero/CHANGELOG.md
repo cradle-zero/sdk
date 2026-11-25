@@ -1,5 +1,11 @@
 # cradlezero
 
+## 0.4.0
+
+- `cradlezero/telemetry` reads and writes `ignition` frames: energy added to the Sun, with the reserve and daily output after it landed, a callsign and a source. New exports: `IgnitionFrame`, `IGNITION_PHENOMENA`, `IGNITION_SOURCES`, `ANONYMOUS_CALLSIGN`.
+- Golden fixtures `ignition.json` and `ignition-anonymous-unknown-field.json`.
+- The cradlezero.dev manual documents the ignition frame.
+
 ## 0.3.0
 
 - Breaking: removed `JOULES_PER_DOLLAR` (named `JOULES_PER_USD` in 0.1.0). Energy in CradleZero is measured only in joules; the package no longer defines any conversion from money.
