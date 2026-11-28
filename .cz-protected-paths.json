@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repo": "sdk",
+  "tier0_max_files": 3,
+  "lockfiles": ["pnpm-lock.yaml", "package.json"],
+  "protected_globs": [
+    "packages/cradlezero/**",
+    "scripts/check-api.ts",
+    "scripts/plan-guard.mjs",
+    ".cz-protected-paths.json",
+    ".gitleaks.toml",
+    ".github/CODEOWNERS",
+    ".github/workflows/**",
+    "mise.toml",
+    "package.json"
+  ],
+  "owner_merge_always_globs": ["**"]
+}
