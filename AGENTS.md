@@ -21,3 +21,8 @@ Public repository. Everything here is visible to everyone. It holds thin public 
 - Telemetry readers are tolerant: ignore unknown fields, default missing optional ones. Add a fixture for every new frame version.
 - TypeScript: strict, `exactOptionalPropertyTypes`, `noUncheckedIndexedAccess`, relative imports with `.ts` extensions, erasable syntax only.
 - Work on a branch and open a pull request. `main` accepts squash merges only after `gate` passes.
+
+## Engineering Operating System (EOS)
+
+- Maintainer pull requests must include the `## EOS Metadata` trailer block from `.github/pull_request_template.md` (`EOS-Tier`, `EOS-Linear`, plus `EOS-Plan` and `EOS-Phase` for Tier 1 and Tier 2), obey `.cz-protected-paths.json`, and pass `scripts/plan-guard.mjs` inside CI `gate`.
+- Never include private repository URLs, private operational details, or commercial terms in pull requests or repository files, and never click the GitHub Web UI "Update branch" button.
