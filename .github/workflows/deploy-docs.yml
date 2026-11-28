@@ -10,16 +10,24 @@ permissions:
 
 concurrency:
   group: deploy-docs
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
-    if: vars.DOCS_DEPLOY_ENABLED == 'true'
+    if: vars.DOCS_DEPLOY_ENABLED == 'true' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: docs
     steps:
+      - name: Verify main branch ref
+        run: |
+          if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
+            echo "BLOCKED: deploy-docs must run from refs/heads/main (got ${GITHUB_REF})" >&2
+            exit 1
+          fi
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
       - run: pnpm install --frozen-lockfile
       - run: pnpm site
